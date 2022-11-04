@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import * as C from './styles';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Button,
@@ -8,7 +9,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Link,
-  Stack,
+  Stack
 } from '@chakra-ui/react';
 
 import { 
@@ -20,8 +21,15 @@ import {
   ArrowForwardIcon
 } from '@chakra-ui/icons';
 
+
+
 function Home() {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+
+  function handleSignUp() {
+    navigate('/menu');
+  }
 
   return (
     <C.Main>
@@ -64,7 +72,14 @@ function Home() {
           </InputGroup>
           <Link><ChevronRightIcon />Esqueceu a sua senha?</Link>
 
-          <Button rightIcon={<ArrowForwardIcon />} size='lg' width='100%' backgroundColor='#25B24A' color='#fff'>
+          <Button 
+            rightIcon={<ArrowForwardIcon />} 
+            size='lg' 
+            width='100%' 
+            backgroundColor='#25B24A' 
+            color='#fff'
+            onClick={handleSignUp}
+          >
             Entrar
           </Button>
 

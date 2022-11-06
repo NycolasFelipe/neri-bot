@@ -1,16 +1,31 @@
 import * as C from './styles';
 import { useNavigate } from 'react-router-dom';
-import {
-  Button,
-} from '@chakra-ui/react';
-import {
-  ChevronRightIcon
-} from '@chakra-ui/icons';
+import { useEffect } from 'react';
+import { Button } from '@chakra-ui/react';
+import { ChevronRightIcon } from '@chakra-ui/icons';
 
 function Menu() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    handleLoginSession();
+  }, []);
+
+  function handleLoginSession() {
+    const defaultEmail = "usuario@mail.com";
+    const defaultPassword = "senha1234";
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (userData) {
+      let { email } = userData;
+      let { password } = userData;
+      if (email == defaultEmail && password == defaultPassword) 
+        return;
+    }
+    handleSignOut();
+  }
+
   function handleSignOut() {
+    localStorage.removeItem('userData');
     navigate('/');
   }
 

@@ -36,7 +36,7 @@ export const ContainerRight = styled.div`
   }
 `;
 
-export const Header = styled.h1`
+export const Header = styled.div`
   margin: 0 auto;
   padding-top: 40px;
   pointer-events: none;
@@ -109,4 +109,10 @@ export const LoginSection = styled.div`
   & > button:hover {
     background: #2ac954;
   }
+`;
+
+export const ErrorMessage = styled.span`
+  margin: 0 auto;
+  color: red;
+  font-size: 0.8rem;
 `;

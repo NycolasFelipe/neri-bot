@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-
 const mainColor = "#005E93";
-
 
 export const Main = styled.div`
   display: flex;
@@ -71,7 +69,7 @@ export const Subtitle = styled.h1`
 export const HeaderDescription = styled.h2`
   font-family: 'Wire One', sans-serif;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   text-align: center;
   margin: 0;
   margin-top: -20px;

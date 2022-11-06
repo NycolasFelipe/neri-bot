@@ -13,6 +13,15 @@ export const ContainerLeft = styled.div`
   justify-content: center;
   background: #F9F9F9;
   width: 60%;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 540px) {
+    align-content: flex-start;
+    padding-top: 60px;
+  }
 `;
 
 export const ButtonCol = styled.div`
@@ -28,8 +37,18 @@ export const ButtonCol = styled.div`
     font-size: 1.5rem;
     margin-bottom: 20px;
   }
-`;
 
+  @media screen and (max-width: 900px) {
+    justify-content: center;
+  }
+  @media screen and (max-width: 540px) {
+    flex-direction: column;
+    gap: 0;
+    & > button {
+      height: 100px;
+    }
+  }
+`;
 
 export const ContainerRight = styled.div`
   background: #F9F9F9;
@@ -39,4 +58,8 @@ export const ContainerRight = styled.div`
   background-position-y: 45%;
   background-repeat: no-repeat;
   flex: 1;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;

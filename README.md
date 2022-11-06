@@ -1,8 +1,8 @@
 # Neri BOT
 Este projeto ainda não está finalizado.
 
-## Capturas de tela
-![screenshot-1](https://user-images.githubusercontent.com/71052352/193496128-b46e1622-13b3-46cf-85c7-bdea21e41dc8.jpg)
+## Capturas
+![neribot](https://user-images.githubusercontent.com/71052352/200070939-e242e38c-2872-499e-8019-e752c904ff54.gif)
 
 
 ## Bibliotecas utilizadas

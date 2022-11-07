@@ -36,6 +36,7 @@ function Menu() {
           <Button 
             size='sm' 
             color='#4e8fc5'
+            onClick={() => navigate('/consulta')}
           >
             Nova Consulta
           </Button>

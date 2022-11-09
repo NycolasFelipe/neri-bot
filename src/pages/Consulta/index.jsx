@@ -91,7 +91,7 @@ function Consulta() {
           !document.getElementById('historicoFamiliar').value ||
           !document.getElementById('historicoUsoMedicamentos').value
         ) {
-          setError('Você precisa pelos menos uma opção em cada item.');
+          setError('Você precisa selecionar pelos menos uma opção em cada item.');
           return;
         }
         userInfo.historico.fumante = 

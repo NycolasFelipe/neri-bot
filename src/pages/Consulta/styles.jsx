@@ -51,11 +51,11 @@ export const StatusItem = styled.div`
     margin: 0 8px;
     font-size: 14px;
   }
-  @media screen and (max-width: 350px) {
+  @media screen and (max-width: 380px) {
     font-size: 0.8rem;
     & > :not(p) {
-      font-size: 14px;
-      padding-bottom: 3px;
+      padding-top: 0;
+      font-size: 8px;
     }
   }
 `;
@@ -134,14 +134,6 @@ export const FormButtons = styled.div`
   }
 `;
 
-export const ErrorMessage = styled.div`
-  display: flex;
-  justify-content: center;
-  color: #ff0000;
-  margin-top: 5px;
-  font-size: 0.8rem;
-`;
-
 export const CampoHistorico = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
   & > div > label {
@@ -163,4 +155,12 @@ export const CampoHistorico = styled.div`
 
 export const CampoSintomas = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
+`;
+
+export const ErrorMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #ff0000;
+  margin-top: 5px;
+  font-size: 0.8rem;
 `;

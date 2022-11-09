@@ -41,11 +41,11 @@ function Home() {
 
   function handleSignIn() {
     if (!email || !password) {
-      setError('You must fill in all fields.');
+      setError('Você precisa preencher todos os campos.');
       return;
     } 
-    if (email != defaultEmail || password != defaultPassword) {
-      setError('Wrong email or password.');
+    if (email !== defaultEmail || password !== defaultPassword) {
+      setError('Senha ou e-mail incorretos.');
       return;
     }
     const userData = {
@@ -61,7 +61,7 @@ function Home() {
     if (userData) {
       let { email } = userData;
       let { password } = userData;
-      if (email == defaultEmail && password == defaultPassword)
+      if (email === defaultEmail && password === defaultPassword)
         navigate('/menu');
     }
   }
@@ -101,7 +101,7 @@ function Home() {
                 id='emailInput'
               />
               {email === '' && (
-                <FormHelperText>Email is required.</FormHelperText>
+                <FormHelperText>E-mail é necessário.</FormHelperText>
               )}
             </InputGroup>
           </FormControl>
@@ -120,7 +120,7 @@ function Home() {
                 id='passwordInput'
               />
               {password === '' && (
-                <FormHelperText>Password is required.</FormHelperText>
+                <FormHelperText>Senha é necessária</FormHelperText>
               )}
               <InputRightElement width='3rem'>
                 <Button size='sm' onClick={() => setShow((prevState) => !prevState)} color='#4e8fc5'>

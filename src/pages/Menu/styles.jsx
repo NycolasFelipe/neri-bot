@@ -4,6 +4,14 @@ export const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
+  background: #43cea2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  #signoutWarning {
+    margin-top: 100px;
+    background: red !important;
+  }
 `;
 
 export const ContainerLeft = styled.div`
@@ -11,7 +19,6 @@ export const ContainerLeft = styled.div`
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  background: #F9F9F9;
   width: 60%;
   overflow-x: hidden;
 
@@ -51,11 +58,10 @@ export const ButtonCol = styled.div`
 `;
 
 export const ContainerRight = styled.div`
-  background: #F9F9F9;
-  background-image: url('../../img/backgroundMenu.jpg');
+  background-image: url('../../img/backgroundMenu.png');
   background-size: 70%;
   background-position-x: 30%;
-  background-position-y: 45%;
+  background-position-y: 40%;
   background-repeat: no-repeat;
   flex: 1;
 

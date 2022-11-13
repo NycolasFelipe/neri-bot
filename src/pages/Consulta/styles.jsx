@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 const color_green = '#2ac954';
 const color_blue = '#3182CE';
-const color_bg = '#FAFAFA';
 const color_border = '#ddd';
+const color_grey = '#747474';
 
 export const Main = styled.div`
   display: flex;
   align-content: flex-start;
   justify-content: center;
   flex-wrap: wrap;
-  background: ${color_bg};
+  background: #43cea2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width: 100vw;
   height: 100vh;
 `;
@@ -18,18 +20,29 @@ export const Main = styled.div`
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 60px;
   width: 100vw;
-  padding: 14px 20px;
-  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 1.2rem;
   font-weight: 500;
-  background: ${color_blue};
   & > p {
     color: #fff;
+    user-select: none;
   }
   & > button {
     margin-right: 15px;
-    height: 25px;
+    height: 30px;
+    position: absolute;
+    left: 30px;
+  }
+  & > button:hover {
+    color: #fff;
+  }
+  @media screen and (max-width: 540px) {
+    font-size: 0.8rem;
+    padding-left: 110px;
+    width: 80vw;
   }
 `;
 
@@ -40,12 +53,16 @@ export const Status = styled.div`
   padding-top: 40px;
   font-weight: 500;
   font-size: 1.1rem;
+  user-select: none;
 `;
 
 export const StatusItem = styled.div`
   display: flex;
   align-items: center;
-  color: ${props => props.colorItem && color_green};
+  margin-top: 30px;
+  color: #ffffff40;
+  color: ${props => props.colorItem && "#fff"};
+  transition: all 0.3s ease;
   & > :not(p) {
     padding-top: 4px;
     margin: 0 8px;
@@ -64,6 +81,9 @@ export const Campos = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFFFFF, #faf7f4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFFFFF, #faf7f4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border: 1px solid ${color_border};
   border-radius: 5px;
   margin-left: 20px;
@@ -77,6 +97,7 @@ export const Campos = styled.div`
 export const CampoInformacoes = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
   & > div > label {
+    color: ${color_grey};
     font-size: 0.8rem;
     margin-bottom: 3px;
   }
@@ -86,7 +107,9 @@ export const CampoInformacoes = styled.div`
     margin-bottom: 20px;
   }
   #dataNascimento {
-    background: ${color_bg};
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #FDFCFA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #FDFCFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     height: 35px;
     padding-left: 10px;
     margin-bottom: 20px;
@@ -98,6 +121,11 @@ export const CampoInformacoes = styled.div`
     margin-left: -1px;
     outline: none;
     transition: all 0.05s ease;
+  }
+  .sexoOpcoes {
+    & > label {
+      font-weight: 500;
+    }
   }
   .nextButton {
     margin-top: 20px;
@@ -137,6 +165,7 @@ export const FormButtons = styled.div`
 export const CampoHistorico = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
   & > div > label {
+    color: ${color_grey};
     font-size: 0.8rem;
     margin-top: 20px;
     margin-bottom: 3px;
@@ -163,4 +192,5 @@ export const ErrorMessage = styled.div`
   color: #ff0000;
   margin-top: 5px;
   font-size: 0.8rem;
+  font-weight: 500;
 `;

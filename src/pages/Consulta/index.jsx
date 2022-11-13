@@ -119,7 +119,7 @@ function Consulta() {
         closeOnOverlayClick={false}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent marginTop='15%'>
           <ModalHeader color='#4E8FC5'>Cancelar consulta?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -136,14 +136,16 @@ function Consulta() {
         </ModalContent>
       </Modal>
       <C.Header>
-        <Button onClick={onOpen}><ArrowBackIcon /></Button>
+        <Button onClick={onOpen} leftIcon={<ArrowBackIcon />} colorScheme='whiteAlpha' variant='outline'>
+          Sair
+        </Button>
         <Text>Por favor, preencha os dados a seguir.</Text>
       </C.Header>
       <C.Status>
-        <C.StatusItem colorItem={status.informacoes}>
+        <C.StatusItem colorItem={status.informacoes || status.historico || status.sintomas}>
           <Text>Informações</Text>
         </C.StatusItem>
-        <C.StatusItem colorItem={status.historico}>
+        <C.StatusItem colorItem={status.historico || status.sintomas}>
           <ArrowRightIcon />
           <Text>Histórico</Text>
         </C.StatusItem>
@@ -160,6 +162,7 @@ function Consulta() {
               id='nomeCompleto' 
               type='text' 
               autoComplete='off'
+              defaultValue=''
             />
             <FormLabel>Data de nascimento</FormLabel>
             <C.CampoNascimento>
@@ -177,9 +180,9 @@ function Consulta() {
             </C.CampoNascimento>
             <FormLabel>Sexo</FormLabel>
             <RadioGroup id='sexo' defaultValue='masc'>
-              <HStack spacing='24px'>
-                <Radio name='sexo' value='masc'>Masculino</Radio>
-                <Radio name='sexo' value='fem'>Feminino</Radio>
+              <HStack className='sexoOpcoes' spacing='24px'>
+                <Radio name='sexo' value='masc' size='sm'>Masculino</Radio>
+                <Radio name='sexo' value='fem' size='sm'>Feminino</Radio>
               </HStack>
             </RadioGroup>
             <Button 

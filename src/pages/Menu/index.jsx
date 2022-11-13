@@ -1,11 +1,12 @@
 import * as C from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 
 function Menu() {
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     handleLoginSession();
@@ -18,7 +19,7 @@ function Menu() {
     if (userData) {
       let { email } = userData;
       let { password } = userData;
-      if (email == defaultEmail && password == defaultPassword) 
+      if (email === defaultEmail && password === defaultPassword) 
         return;
     }
     handleSignOut();
@@ -31,6 +32,29 @@ function Menu() {
 
   return (
     <C.Container>
+       <Modal 
+        blockScrollOnMount={false} 
+        isOpen={isOpen} 
+        onClose={onClose} 
+        closeOnOverlayClick={false}
+      >
+        <ModalOverlay />
+        <ModalContent marginTop='15%'>
+          <ModalHeader color='#4E8FC5'>Tem certeza que deseja sair?</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text mb='1rem'>
+              Você será desconectado de sua conta.
+            </Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Continuar
+            </Button>
+            <Button variant='ghost' onClick={handleSignOut}>Sair</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <C.ContainerLeft>
         <C.ButtonCol>
           <Button 
@@ -58,7 +82,7 @@ function Menu() {
             size='sm' 
             color='#4e8fc5'
             _hover={{ bg: "#f14747", color: "#fff" }}
-            onClick={handleSignOut}
+            onClick={onOpen}
           >
             Sair
           <ChevronRightIcon />

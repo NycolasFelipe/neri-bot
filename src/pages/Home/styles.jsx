@@ -4,18 +4,22 @@ const mainColor = "#005E93";
 export const Main = styled.div`
   display: flex;
   justify-content: center;
-  background: #FAFAFA;
+  background: #43cea2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 `;
 
 export const ContainerLeft = styled.div`
   flex: 1;
-  background-image: url('../../img/backgroundMain.jpg');
+  background-image: url('../../img/backgroundMain.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #FAFAFA;
+  background-size: 60%;
   height: 100vh;
-
+  @media screen and (max-width: 1100px) {
+    background-size: 80%;
+  }
   @media screen and (max-width: 900px) {
     background-image: none;
     flex: none;
@@ -52,7 +56,10 @@ export const Title = styled.h1`
   font-size: 5rem;
   font-weight: 600;
   margin: 0;
-  color: ${mainColor};
+  background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
   user-select: none;
 `;
 
@@ -62,18 +69,18 @@ export const Subtitle = styled.h1`
   font-size: 2.5rem;
   margin: 0;
   margin-top: 45px;
-  color: ${mainColor};
+  color: #41C8A2;
   user-select: none;
 `;
 
 export const HeaderDescription = styled.h2`
-  font-family: 'Wire One', sans-serif;
+  font-family: 'Dosis', sans-serif;
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1rem;
   text-align: center;
   margin: 0;
   margin-top: -20px;
-  color: ${mainColor};
+  color: #185a9d;
   user-select: none;
 `;
 

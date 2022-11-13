@@ -2,7 +2,7 @@
 Este projeto ainda não está finalizado.
 
 ## Capturas
-![neribot](https://user-images.githubusercontent.com/71052352/200070939-e242e38c-2872-499e-8019-e752c904ff54.gif)
+![image](https://user-images.githubusercontent.com/71052352/201551220-e6c68246-49d7-4cab-bfde-b1d2539aedf2.png)
 
 
 ## Bibliotecas utilizadas

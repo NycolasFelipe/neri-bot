@@ -91,7 +91,7 @@ export const Campos = styled.div`
   margin-top: 20px;
   width: 500px;
   box-sizing: border-box;
-  padding: 10px 15px;
+  padding: 15px 25px;
 `;
 
 export const CampoInformacoes = styled.div`
@@ -151,6 +151,7 @@ export const FormButtons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  width: 100%;
   > * {
     &:last-child {
       flex: 1;
@@ -164,6 +165,7 @@ export const FormButtons = styled.div`
 
 export const CampoHistorico = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
+  flex-wrap: wrap;
   & > div > label {
     color: ${color_grey};
     font-size: 0.8rem;
@@ -182,6 +184,34 @@ export const CampoHistorico = styled.div`
   } 
 `;
 
+export const CampoHistoricoHeader = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 0.9rem;
+  padding-bottom: 10px;
+  font-weight: 600;
+  color: ${color_grey};
+`;
+
+export const CampoHistoricoTitle = styled.p`
+  flex: 1;
+  pointer-events: none;
+`;
+
+export const CampoHistoricoText = styled.p`
+  min-width: 100px;
+  text-align: end;
+  pointer-events: none;
+`;
+
+export const CampoHistoricoItem = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 0.8rem;
+  line-height: 2;
+
+`;
+
 export const CampoSintomas = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
 `;
@@ -190,7 +220,7 @@ export const ErrorMessage = styled.div`
   display: flex;
   justify-content: center;
   color: #ff0000;
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 0.8rem;
   font-weight: 500;
 `;

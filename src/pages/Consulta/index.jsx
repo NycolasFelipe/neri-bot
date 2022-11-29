@@ -1,5 +1,6 @@
 import { 
   Button, 
+  Checkbox, 
   FormControl, 
   FormLabel, 
   HStack, 
@@ -14,7 +15,16 @@ import {
   Radio, 
   RadioGroup, 
   Select, 
+  Stack, 
+  Table, 
+  TableContainer, 
+  Tbody, 
+  Td, 
   Text, 
+  Tfoot, 
+  Th, 
+  Thead, 
+  Tr, 
   useDisclosure
 } from '@chakra-ui/react';
 import { 
@@ -49,9 +59,13 @@ function Consulta() {
       sexo: null,
     },
     historico: {
-      fumante: null,
-      familiar: null,
-      usoMedicamentos: null,
+      familiarDoencaGenetica: null,
+      hipertensao: null,
+      diabetes: null,
+      fumanteTabagismo: null,
+      doencasRenais: null,
+      gestante: null,
+      usoRegularMedicamentos: null,
     }
   })
 
@@ -69,6 +83,14 @@ function Consulta() {
     setStatus(newStatus);
   }
 
+  function historicoValido(historico) {
+    let item = document.getElementsByName(historico);
+    for (let i = 0; i < item.length; i++) {
+      if (item[i].checked) return item[i].value;
+    }
+    return null;
+  }
+
   function handleNextButton(nextStage) {
     switch(nextStage) {
       case 'historico':
@@ -79,27 +101,40 @@ function Consulta() {
         userInfo.informacoes.nomeCompleto = document.getElementById('nomeCompleto').value;
         userInfo.informacoes.dataNascimento = JSON.stringify(startDate);
         let values = document.getElementsByName('sexo');
-        for (let i = 0; i < values.length ; i++) {
+        for (let i = 0; i < values.length; i++) {
           if (values[i].checked) 
             userInfo.informacoes.sexo = values[i].value;  
         }
-      break;
+        break;
 
       case 'sintomas':
+        let familiarDoencaGenetica = historicoValido('familiarDoencaGenetica');
+        let hipertensao = historicoValido('hipertensao');
+        let diabetes = historicoValido('diabetes');
+        let fumanteTabagismo = historicoValido('fumanteTabagismo');
+        let doencasRenais = historicoValido('doencasRenais');
+        let gestante = historicoValido('gestante');
+        let usoRegularMedicamentos = historicoValido('usoRegularMedicamentos');
+
         if (
-          !document.getElementById('historicoFumante').value ||
-          !document.getElementById('historicoFamiliar').value ||
-          !document.getElementById('historicoUsoMedicamentos').value
+          !familiarDoencaGenetica ||
+          !hipertensao ||
+          !diabetes ||
+          !fumanteTabagismo ||
+          !doencasRenais ||
+          !gestante ||
+          !usoRegularMedicamentos
         ) {
-          setError('Você precisa selecionar pelos menos uma opção em cada item.');
-          return;
+          return setError('Você precisa selecionar pelos menos uma opção em cada item.');
         }
-        userInfo.historico.fumante = 
-          document.getElementById('historicoFumante').value;
-        userInfo.historico.familiar = 
-          document.getElementById('historicoFamiliar').value;
-        userInfo.historico.usoMedicamentos = 
-          document.getElementById('historicoUsoMedicamentos').value;
+
+        userInfo.historico.familiarDoencaGenetica = familiarDoencaGenetica;
+        userInfo.historico.hipertensao = hipertensao;
+        userInfo.historico.diabetes = diabetes;
+        userInfo.historico.fumanteTabagismo = fumanteTabagismo;
+        userInfo.historico.doencasRenais = doencasRenais;
+        userInfo.historico.gestante = gestante;
+        userInfo.historico.usoRegularMedicamentos = usoRegularMedicamentos;
         break;
 
       default:
@@ -110,9 +145,10 @@ function Consulta() {
     console.log(userInfo);
   }
 
+
   return (
     <C.Main>
-       <Modal 
+      <Modal 
         blockScrollOnMount={false} 
         isOpen={isOpen} 
         onClose={onClose} 
@@ -180,7 +216,7 @@ function Consulta() {
             </C.CampoNascimento>
             <FormLabel>Sexo</FormLabel>
             <RadioGroup id='sexo' defaultValue='masc'>
-              <HStack className='sexoOpcoes' spacing='24px'>
+              <HStack spacing='24px'>
                 <Radio name='sexo' value='masc' size='sm'>Masculino</Radio>
                 <Radio name='sexo' value='fem' size='sm'>Feminino</Radio>
               </HStack>
@@ -200,40 +236,126 @@ function Consulta() {
           </FormControl>
         </C.CampoInformacoes>
         <C.CampoHistorico show={status.historico}>
-          <FormControl>
-            <FormLabel htmlFor='historicoFumante'>É fumante?</FormLabel>
-            <Select 
-              id='historicoFumante' 
-              placeholder='Selecione uma opção'
-              defaultValue='nao'
-              icon={<ChevronDownIcon />}
-            >
-              <option value='sim'>Sim</option>
-              <option value='nao'>Não</option>
-            </Select>
-            <FormLabel htmlFor='historicoFamiliar'>
-              Possui familiares com histórico de doenças?
-            </FormLabel>
-            <Select 
-              id='historicoFamiliar' 
-              placeholder='Selecione uma opção'
-              defaultValue='nao'
-            >
-              <option value='sim'>Sim</option>
-              <option value='nao'>Não</option>
-            </Select>
-            <FormLabel htmlFor='historicoUsoMedicamentos'>
-              Faz uso regular de medicamentos?
-            </FormLabel>
-            <Select 
-              id='historicoUsoMedicamentos' 
-              placeholder='Selecione uma opção'
-              defaultValue='nao'
-            >
-              <option value='sim'>Sim</option>
-              <option value='nao'>Não</option>
-            </Select>
-            <C.FormButtons>
+          <C.CampoHistoricoHeader>
+            <C.CampoHistoricoTitle>
+              Histórico de saúde
+            </C.CampoHistoricoTitle>
+            <C.CampoHistoricoText>Sim</C.CampoHistoricoText>
+            <C.CampoHistoricoText>Não</C.CampoHistoricoText>
+          </C.CampoHistoricoHeader>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Familiar com doença genética
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='familiarDoencaGenetica' value='sim'></Radio>
+                <Radio name='familiarDoencaGenetica' value='nao'></Radio>
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Hipertensão
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack 
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='hipertensao' value='sim' />
+                <Radio name='hipertensao' value='nao' />
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Diabetes
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack 
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='diabetes' value='sim' />
+                <Radio name='diabetes' value='nao' />
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Fumante/Tabagismo
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack 
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='fumanteTabagismo' value='sim' />
+                <Radio name='fumanteTabagismo' value='nao' />
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Doenças renais crônicas
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack 
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='doencasRenais' value='sim' />
+                <Radio name='doencasRenais' value='nao' />
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Gestante
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack 
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='gestante' value='sim' />
+                <Radio name='gestante' value='nao' />
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.CampoHistoricoItem>
+            <C.CampoHistoricoTitle>
+              Faz uso regular de medicamentos
+            </C.CampoHistoricoTitle>
+            <RadioGroup>
+              <Stack 
+                justifyContent='space-between' 
+                width='115px'
+                direction='row'
+                paddingTop='6px'
+              >
+                <Radio name='usoRegularMedicamentos' value='sim' />
+                <Radio name='usoRegularMedicamentos' value='nao' />
+              </Stack>
+            </RadioGroup>
+          </C.CampoHistoricoItem>
+          <C.FormButtons>
               <Button
                 size='lg'
                 onClick={() => setNewStatus('informacoes')}
@@ -244,7 +366,7 @@ function Consulta() {
                 id='nextInformacoes'
                 className='nextButton'
                 rightIcon={<ArrowForwardIcon />} 
-                size='lg' 
+                size='lg'
                 backgroundColor='#25B24A' 
                 color='#fff'
                 onClick={() => handleNextButton('sintomas')}
@@ -252,7 +374,6 @@ function Consulta() {
                 Prosseguir
               </Button>
             </C.FormButtons>
-          </FormControl>
         </C.CampoHistorico>
         <C.CampoSintomas show={status.sintomas}>
           <FormControl>

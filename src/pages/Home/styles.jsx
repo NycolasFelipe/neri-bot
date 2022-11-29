@@ -31,6 +31,7 @@ export const ContainerRight = styled.div`
   width: 400px;
   height: 100vh;
   right: 0;
+  position: relative;
 
   @media screen and (max-width: 900px) {
     width: 100vw;
@@ -120,4 +121,17 @@ export const ErrorMessage = styled.span`
   margin: 0 auto;
   color: red;
   font-size: 0.8rem;
+`;
+
+export const AboutSection = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  padding: 20px 0;
+
+  & > button {
+    color: ${mainColor};
+  }
 `;

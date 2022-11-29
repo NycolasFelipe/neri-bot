@@ -18,6 +18,7 @@ import {
   LockIcon,
   ChevronRightIcon,
   ArrowForwardIcon,
+  QuestionOutlineIcon,
 } from '@chakra-ui/icons';
 
 
@@ -146,6 +147,15 @@ function Home() {
 
           <Link className='criar-conta'>Não possui conta? Crie uma agora</Link>
         </C.LoginSection>
+        <C.AboutSection>
+          <Button 
+            rightIcon={<QuestionOutlineIcon />} 
+            variant='outline'
+            onClick={() => navigate('/sobre')}
+          >
+            Sobre o aplicativo
+          </Button>
+        </C.AboutSection>
       </C.ContainerRight>
     </C.Main>
   )

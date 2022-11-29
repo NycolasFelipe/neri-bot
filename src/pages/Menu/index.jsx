@@ -9,8 +9,14 @@ function Menu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    handleLoginSession();
+    handleFirstLogin();
   }, []);
+
+  function handleFirstLogin() {
+    let userInfo = localStorage.getItem('userInfo');
+    if (!userInfo) return navigate('/informacoes-usuario');
+    else handleLoginSession();
+  }
 
   function handleLoginSession() {
     const defaultEmail = "usuario@mail.com";
@@ -75,8 +81,9 @@ function Menu() {
           <Button 
             size='sm' 
             color='#4e8fc5'
+            onClick={() => navigate('/informacoes-usuario')}
           >
-            Sobre o aplicativo
+            Seus Dados
           </Button>
           <Button 
             size='sm' 
@@ -88,9 +95,6 @@ function Menu() {
           <ChevronRightIcon />
           </Button>
         </C.ButtonCol>
-
-
-       
       </C.ContainerLeft>
       <C.ContainerRight />
     </C.Container>

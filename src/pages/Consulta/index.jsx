@@ -1,10 +1,6 @@
 import { 
   Button, 
-  Checkbox, 
   FormControl, 
-  FormLabel, 
-  HStack, 
-  Input, 
   Modal, 
   ModalBody, 
   ModalCloseButton, 
@@ -14,30 +10,18 @@ import {
   ModalOverlay, 
   Radio, 
   RadioGroup, 
-  Select, 
   Stack, 
-  Table, 
-  TableContainer, 
-  Tbody, 
-  Td, 
-  Text, 
-  Tfoot, 
-  Th, 
-  Thead, 
-  Tr, 
+  Text,  
   useDisclosure
 } from '@chakra-ui/react';
 import { 
   ArrowBackIcon, 
   ArrowForwardIcon, 
   ArrowRightIcon, 
-  ChevronDownIcon 
+  EditIcon
 } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import DataPicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import DateDiff from 'date-diff';
 import * as C from './styles';
 
 
@@ -45,6 +29,8 @@ function Consulta() {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [error, setError] = useState(null);
+  const userInfoLocalStorage = JSON.parse(localStorage.getItem('userInfo'));
+  const informacoes = Object.assign(userInfoLocalStorage.informacoes);
 
   const [status, setStatus] = useState({
     informacoes: true,
@@ -53,11 +39,6 @@ function Consulta() {
   });
 
   const [userInfo, setUserInfo] = useState({
-    informacoes: {
-      nomeCompleto: null,
-      dataNascimento: null,
-      sexo: null,
-    },
     historico: {
       familiarDoencaGenetica: null,
       hipertensao: null,
@@ -68,10 +49,6 @@ function Consulta() {
       usoRegularMedicamentos: null,
     }
   })
-
-  const [startDate, setStartDate] = useState(new Date());
-  const todayDate = new Date();
-  const idade = new DateDiff(todayDate, startDate).years();
   
   function setNewStatus(nextStatus) {
     let newStatus = JSON.parse(JSON.stringify(status));
@@ -93,20 +70,6 @@ function Consulta() {
 
   function handleNextButton(nextStage) {
     switch(nextStage) {
-      case 'historico':
-        if (!document.getElementById('nomeCompleto').value) {
-          setError('Você precisa preencher com seu nome completo.');
-          return;
-        }
-        userInfo.informacoes.nomeCompleto = document.getElementById('nomeCompleto').value;
-        userInfo.informacoes.dataNascimento = JSON.stringify(startDate);
-        let values = document.getElementsByName('sexo');
-        for (let i = 0; i < values.length; i++) {
-          if (values[i].checked) 
-            userInfo.informacoes.sexo = values[i].value;  
-        }
-        break;
-
       case 'sintomas':
         let familiarDoencaGenetica = historicoValido('familiarDoencaGenetica');
         let hipertensao = historicoValido('hipertensao');
@@ -145,6 +108,10 @@ function Consulta() {
     console.log(userInfo);
   }
 
+  function handleEditarDados() {
+    navigate('/informacoes-usuario');
+  }
+
 
   return (
     <C.Main>
@@ -156,7 +123,7 @@ function Consulta() {
       >
         <ModalOverlay />
         <ModalContent marginTop='15%'>
-          <ModalHeader color='#4E8FC5'>Cancelar consulta?</ModalHeader>
+          <ModalHeader color='#4E8FC5'>Deseja mesmo sair?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text mb='1rem'>
@@ -175,65 +142,59 @@ function Consulta() {
         <Button onClick={onOpen} leftIcon={<ArrowBackIcon />} colorScheme='whiteAlpha' variant='outline'>
           Sair
         </Button>
+        <C.HeaderTitle>Nova Consulta</C.HeaderTitle>
         <Text>Por favor, preencha os dados a seguir.</Text>
       </C.Header>
-      <C.Status>
-        <C.StatusItem colorItem={status.informacoes || status.historico || status.sintomas}>
-          <Text>Informações</Text>
-        </C.StatusItem>
-        <C.StatusItem colorItem={status.historico || status.sintomas}>
-          <ArrowRightIcon />
-          <Text>Histórico</Text>
-        </C.StatusItem>
-        <C.StatusItem colorItem={status.sintomas}>
-          <ArrowRightIcon />
-          <Text>Sintomas</Text>
-        </C.StatusItem>
-      </C.Status>
       <C.Campos>
         <C.CampoInformacoes show={status.informacoes}>
-          <FormControl>
-            <FormLabel htmlFor='nomeCompleto'>Nome completo</FormLabel>
-            <Input 
-              id='nomeCompleto' 
-              type='text' 
-              autoComplete='off'
-              defaultValue=''
-            />
-            <FormLabel>Data de nascimento</FormLabel>
-            <C.CampoNascimento>
-              <DataPicker 
-                id='dataNascimento'
-                dateFormat="dd/MM/yyyy"
-                selected={startDate}
-                onChange={(date) => date != null && setStartDate(date)}
-                placeholderText="Insira uma data"
-                required={true}
-              />
-              {idade > 0 && (
-                <Text>{idade} anos</Text>
-              )}
-            </C.CampoNascimento>
-            <FormLabel>Sexo</FormLabel>
-            <RadioGroup id='sexo' defaultValue='masc'>
-              <HStack spacing='24px'>
-                <Radio name='sexo' value='masc' size='sm'>Masculino</Radio>
-                <Radio name='sexo' value='fem' size='sm'>Feminino</Radio>
-              </HStack>
-            </RadioGroup>
-            <Button 
-              id='nextInformacoes'
-              className='nextButton'
-              rightIcon={<ArrowForwardIcon />} 
-              size='lg' 
-              width='100%' 
-              backgroundColor='#25B24A' 
-              color='#fff'
-              onClick={() => handleNextButton('historico')}
-            >
-              Prosseguir
-            </Button>
-          </FormControl>
+          <C.CampoInformacoesItem>
+            <C.CampoInformacoesTitle>Nome Completo</C.CampoInformacoesTitle>
+            <C.CampoInformacoesValue>{informacoes.nomeCompleto}</C.CampoInformacoesValue>
+          </C.CampoInformacoesItem>
+          <C.CampoInformacoesItem>
+            <C.CampoInformacoesTitle>Data de Nascimento</C.CampoInformacoesTitle>
+            <C.CampoInformacoesValue>{informacoes.dataNascimento}</C.CampoInformacoesValue>
+          </C.CampoInformacoesItem>
+          <C.CampoInformacoesItem>
+            <C.CampoInformacoesTitle>Altura</C.CampoInformacoesTitle>
+            <C.CampoInformacoesValue>{informacoes.altura} cm</C.CampoInformacoesValue>
+          </C.CampoInformacoesItem>
+          <C.CampoInformacoesItem>
+            <C.CampoInformacoesTitle>Peso</C.CampoInformacoesTitle>
+            <C.CampoInformacoesValue>{informacoes.peso} kg</C.CampoInformacoesValue>
+          </C.CampoInformacoesItem>
+          <C.CampoInformacoesItem>
+            <C.CampoInformacoesTitle>Sexo</C.CampoInformacoesTitle>
+            <C.CampoInformacoesValue>{informacoes.sexo === "masc" ? "Masculino" : "Feminino"}</C.CampoInformacoesValue>
+          </C.CampoInformacoesItem>
+          {
+            informacoes.sexo === "fem" && (
+              <C.CampoInformacoesItem>
+                <C.CampoInformacoesTitle>Gestante</C.CampoInformacoesTitle>
+                <C.CampoInformacoesValue>{informacoes.gestante === "sim" ? "Sim" : "Não"}</C.CampoInformacoesValue>
+              </C.CampoInformacoesItem>
+            )
+          }
+          <C.FormButtons>
+              <Button
+                size='lg'
+                onClick={() => handleEditarDados()}
+                rightIcon={<EditIcon />}
+              >
+                Editar
+              </Button>
+              <Button 
+                id='nextInformacoes'
+                className='nextButton'
+                rightIcon={<ArrowForwardIcon />} 
+                size='lg'
+                backgroundColor='#25B24A' 
+                color='#fff'
+                onClick={() => handleNextButton('historico')}
+              >
+                Confirmar e prosseguir
+              </Button>
+            </C.FormButtons>
         </C.CampoInformacoes>
         <C.CampoHistorico show={status.historico}>
           <C.CampoHistoricoHeader>
@@ -402,6 +363,19 @@ function Consulta() {
           {error && error}
         </C.ErrorMessage>
       </C.Campos>
+      <C.Status>
+        <C.StatusItem colorItem={status.informacoes || status.historico || status.sintomas}>
+          <Text>Informações</Text>
+        </C.StatusItem>
+        <C.StatusItem colorItem={status.historico || status.sintomas}>
+          <ArrowRightIcon />
+          <Text>Histórico</Text>
+        </C.StatusItem>
+        <C.StatusItem colorItem={status.sintomas}>
+          <ArrowRightIcon />
+          <Text>Sintomas</Text>
+        </C.StatusItem>
+      </C.Status>
     </C.Main>
   );
 }

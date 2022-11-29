@@ -24,7 +24,7 @@ export const Header = styled.div`
   flex-wrap: wrap;
   width: 100vw;
   margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   & > p {
     color: #fff;
@@ -73,6 +73,64 @@ export const Campos = styled.div`
   padding: 15px 25px;
 `;
 
+export const CampoInformacoes = styled.div`
+  display: flex;
+  & > div > label {
+    color: ${color_grey};
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+  }
+  & > div > input {
+    height: 35px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+  #dataNascimento {
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #FDFCFA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #FDFCFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 35px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border: 1px solid ${color_border};
+    border-radius: 6px;
+  }
+  #dataNascimento:focus {
+    border: 2px solid ${color_blue};
+    margin-left: -1px;
+    outline: none;
+    transition: all 0.05s ease;
+  }
+  .sexoOpcoes {
+    & > label {
+      font-weight: 500;
+    }
+  }
+  .nextButton {
+    margin-top: 20px;
+  }
+  .nextButton:hover {
+    background: ${color_green};
+  }
+`;
+
+export const CampoNascimento = styled.div`
+  display: flex;
+  & > p {
+    width: 200%;
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: ${color_blue};
+  }
+`;
+
+export const CampoGestante = styled.div`
+  display: ${props => props.show ? 'block' : 'none'};
+  overflow: hidden;
+`;
+
 export const FormButtons = styled.div`
   display: flex;
   justify-content: space-between;
@@ -89,83 +147,6 @@ export const FormButtons = styled.div`
   }
 `;
 
-export const CampoInformacoes = styled.div`
-  display: ${props => props.show ? 'flex' : 'none'};
-  flex-wrap: wrap;
-  margin-top: -2px;
-`;
-
-export const CampoInformacoesItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  pointer-events: none;
-  line-height: 1.8;
-`;
-
-export const CampoInformacoesTitle = styled.p`
-  color: ${color_grey};
-  font-size: 0.9rem;
-  font-weight: 500;
-`;
-
-export const CampoInformacoesValue = styled.p`
-  font-weight: 400;
-`;
-
-export const CampoHistorico = styled.div`
-  display: ${props => props.show ? 'flex' : 'none'};
-  flex-wrap: wrap;
-  & > div > label {
-    color: ${color_grey};
-    font-size: 0.8rem;
-    margin-top: 20px;
-    margin-bottom: 3px;
-  }
-  & > div > label:first-child {
-    margin-top: 0;
-  }
-  & > * {
-    select {
-      height: 35px;
-      padding-left: 10px;
-      
-    }
-  } 
-`;
-
-export const CampoHistoricoHeader = styled.div`
-  display: flex;
-  width: 100%;
-  font-size: 0.9rem;
-  padding-bottom: 10px;
-  font-weight: 600;
-  color: ${color_grey};
-`;
-
-export const CampoHistoricoTitle = styled.p`
-  flex: 1;
-  pointer-events: none;
-`;
-
-export const CampoHistoricoText = styled.p`
-  min-width: 100px;
-  text-align: end;
-  pointer-events: none;
-`;
-
-export const CampoHistoricoItem = styled.div`
-  display: flex;
-  width: 100%;
-  font-size: 0.9rem;
-  line-height: 2;
-
-`;
-
-export const CampoSintomas = styled.div`
-  display: ${props => props.show ? 'flex' : 'none'};
-`;
-
 export const ErrorMessage = styled.div`
   display: flex;
   justify-content: center;
@@ -173,35 +154,4 @@ export const ErrorMessage = styled.div`
   margin-top: 10px;
   font-size: 0.8rem;
   font-weight: 500;
-`;
-
-export const Status = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  font-weight: 500;
-  font-size: 1.1rem;
-  user-select: none;
-  margin-top: -10px;
-`;
-
-export const StatusItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-  color: #ffffff40;
-  color: ${props => props.colorItem && "#fff"};
-  transition: all 0.3s ease;
-  & > :not(p) {
-    padding-top: 4px;
-    margin: 0 8px;
-    font-size: 14px;
-  }
-  @media screen and (max-width: 380px) {
-    font-size: 0.8rem;
-    & > :not(p) {
-      padding-top: 0;
-      font-size: 8px;
-    }
-  }
 `;

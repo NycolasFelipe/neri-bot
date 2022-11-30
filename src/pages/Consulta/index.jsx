@@ -1,5 +1,6 @@
 import { 
   Button, 
+  Checkbox, 
   FormControl, 
   Modal, 
   ModalBody, 
@@ -29,6 +30,7 @@ function Consulta() {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [error, setError] = useState(null);
+  const [reportEnded, setReportEnded] = useState(false);
   const userInfoLocalStorage = JSON.parse(localStorage.getItem('userInfo'));
   const informacoes = Object.assign(userInfoLocalStorage.informacoes);
 
@@ -38,7 +40,7 @@ function Consulta() {
     sintomas: false,
   });
 
-  const [userInfo, setUserInfo] = useState({
+  const [userReport, setUserReport] = useState({
     historico: {
       familiarDoencaGenetica: null,
       hipertensao: null,
@@ -47,8 +49,21 @@ function Consulta() {
       doencasRenais: null,
       gestante: null,
       usoRegularMedicamentos: null,
-    }
-  })
+    },
+    sintomas: {
+      febre: null,
+      dorDeCabeca: null,
+      doresMusculares: null,
+      tosse: null,
+      cansaco: null,
+      febre: null,
+      nausea: null,
+      diarreia: null,
+      perdaDeApetite: null,
+      gargantaInflamada: null,
+      coriza: null,
+    },
+  });
   
   function setNewStatus(nextStatus) {
     let newStatus = JSON.parse(JSON.stringify(status));
@@ -63,7 +78,7 @@ function Consulta() {
   function historicoValido(historico) {
     let item = document.getElementsByName(historico);
     for (let i = 0; i < item.length; i++) {
-      if (item[i].checked) return item[i].value;
+      if (item[i].checked) return item[i].value === "sim";
     }
     return null;
   }
@@ -80,24 +95,51 @@ function Consulta() {
         let usoRegularMedicamentos = historicoValido('usoRegularMedicamentos');
 
         if (
-          !familiarDoencaGenetica ||
-          !hipertensao ||
-          !diabetes ||
-          !fumanteTabagismo ||
-          !doencasRenais ||
-          !gestante ||
-          !usoRegularMedicamentos
+          familiarDoencaGenetica === null ||
+          hipertensao === null ||
+          diabetes === null ||
+          fumanteTabagismo === null ||
+          doencasRenais === null ||
+          gestante === null ||
+          usoRegularMedicamentos === null
         ) {
           return setError('Você precisa selecionar pelos menos uma opção em cada item.');
         }
 
-        userInfo.historico.familiarDoencaGenetica = familiarDoencaGenetica;
-        userInfo.historico.hipertensao = hipertensao;
-        userInfo.historico.diabetes = diabetes;
-        userInfo.historico.fumanteTabagismo = fumanteTabagismo;
-        userInfo.historico.doencasRenais = doencasRenais;
-        userInfo.historico.gestante = gestante;
-        userInfo.historico.usoRegularMedicamentos = usoRegularMedicamentos;
+        userReport.historico.familiarDoencaGenetica = familiarDoencaGenetica;
+        userReport.historico.hipertensao = hipertensao;
+        userReport.historico.diabetes = diabetes;
+        userReport.historico.fumanteTabagismo = fumanteTabagismo;
+        userReport.historico.doencasRenais = doencasRenais;
+        userReport.historico.gestante = gestante;
+        userReport.historico.usoRegularMedicamentos = usoRegularMedicamentos;
+        break;
+
+      case 'finalizar':
+        let febre = document.getElementById('febre').checked;
+        let dorDeCabeca = document.getElementById('dorDeCabeca').checked;
+        let doresMusculares = document.getElementById('doresMusculares').checked;
+        let tosse = document.getElementById('tosse').checked;
+        let cansaco = document.getElementById('cansaco').checked;
+        let nausea = document.getElementById('nausea').checked;
+        let diarreia = document.getElementById('diarreia').checked;
+        let perdaDeApetite = document.getElementById('perdaDeApetite').checked;
+        let gargantaInflamada = document.getElementById('gargantaInflamada').checked;
+        let coriza = document.getElementById('coriza').checked;
+
+        userReport.sintomas.febre = febre;
+        userReport.sintomas.dorDeCabeca = dorDeCabeca;
+        userReport.sintomas.doresMusculares = doresMusculares;
+        userReport.sintomas.tosse = tosse;
+        userReport.sintomas.cansaco = cansaco;
+        userReport.sintomas.nausea = nausea;
+        userReport.sintomas.diarreia = diarreia;
+        userReport.sintomas.perdaDeApetite = perdaDeApetite;
+        userReport.sintomas.gargantaInflamada = gargantaInflamada;
+        userReport.sintomas.coriza = coriza;
+
+        localStorage.setItem('userReport', JSON.stringify(userReport));
+        setReportEnded(true);
         break;
 
       default:
@@ -105,7 +147,6 @@ function Consulta() {
     }
     setError(null);
     setNewStatus(nextStage);
-    console.log(userInfo);
   }
 
   function handleEditarDados() {
@@ -139,7 +180,12 @@ function Consulta() {
         </ModalContent>
       </Modal>
       <C.Header>
-        <Button onClick={onOpen} leftIcon={<ArrowBackIcon />} colorScheme='whiteAlpha' variant='outline'>
+        <Button 
+          onClick={() => reportEnded ? navigate('/menu') : onOpen()} 
+          leftIcon={<ArrowBackIcon />} 
+          colorScheme='whiteAlpha' 
+          variant='outline'
+        >
           Sair
         </Button>
         <C.HeaderTitle>Nova Consulta</C.HeaderTitle>
@@ -330,6 +376,78 @@ function Consulta() {
             </C.FormButtons>
         </C.CampoHistorico>
         <C.CampoSintomas show={status.sintomas}>
+          <C.CampoSintomasHeader>
+            <C.CampoSintomasTitle style={{border: 'none'}}>
+              Sintomas
+            </C.CampoSintomasTitle>
+            <C.CampoSintomasText>Sim</C.CampoSintomasText>
+          </C.CampoSintomasHeader>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Febre
+            </C.CampoSintomasTitle>
+            <Checkbox id='febre' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Dor de cabeça
+            </C.CampoSintomasTitle>
+            <Checkbox id='dorDeCabeca' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Dores musculares
+            </C.CampoSintomasTitle>
+            <Checkbox id='doresMusculares' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Tosse
+            </C.CampoSintomasTitle>
+            <Checkbox id='tosse' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Cansaço
+            </C.CampoSintomasTitle>
+            <Checkbox id='cansaco' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Febre
+            </C.CampoSintomasTitle>
+            <Checkbox id='febre' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Náusea
+            </C.CampoSintomasTitle>
+            <Checkbox id='nausea' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Diarréia
+            </C.CampoSintomasTitle>
+            <Checkbox id='diarreia' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Perda de apetite
+            </C.CampoSintomasTitle>
+            <Checkbox id='perdaDeApetite' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Garganta Inflamada
+            </C.CampoSintomasTitle>
+            <Checkbox id='gargantaInflamada' />
+          </C.CampoSintomasItem>
+          <C.CampoSintomasItem>
+            <C.CampoSintomasTitle>
+              Coriza
+            </C.CampoSintomasTitle>
+            <Checkbox id='coriza' />
+          </C.CampoSintomasItem>
           <FormControl>
             <C.FormButtons>
               <Button
@@ -345,30 +463,42 @@ function Consulta() {
                 size='lg' 
                 backgroundColor='#25B24A' 
                 color='#fff'
-                onClick={() => handleNextButton('sintomas')}
+                onClick={() => handleNextButton('finalizar')}
               >
                 Finalizar consulta
               </Button>
             </C.FormButtons>
           </FormControl>
         </C.CampoSintomas>
+        <C.CampoResultado show={reportEnded}>
+          <C.CampoResultadoHeader>
+            Você terminou a sua consulta.
+          </C.CampoResultadoHeader>
+          <Button size='lg' onClick={() => navigate('/resultados')}>
+            Conferir análise
+          </Button>
+        </C.CampoResultado>
         <C.ErrorMessage >
           {error && error}
         </C.ErrorMessage>
       </C.Campos>
-      <C.Status>
-        <C.StatusItem colorItem={status.informacoes || status.historico || status.sintomas}>
-          <Text>Informações</Text>
-        </C.StatusItem>
-        <C.StatusItem colorItem={status.historico || status.sintomas}>
-          <ArrowRightIcon />
-          <Text>Histórico</Text>
-        </C.StatusItem>
-        <C.StatusItem colorItem={status.sintomas}>
-          <ArrowRightIcon />
-          <Text>Sintomas</Text>
-        </C.StatusItem>
-      </C.Status>
+      {
+        !reportEnded && (
+          <C.Status>
+            <C.StatusItem colorItem={status.informacoes || status.historico || status.sintomas}>
+              <Text>Informações</Text>
+            </C.StatusItem>
+            <C.StatusItem colorItem={status.historico || status.sintomas}>
+              <ArrowRightIcon />
+              <Text>Histórico</Text>
+            </C.StatusItem>
+            <C.StatusItem colorItem={status.sintomas}>
+              <ArrowRightIcon />
+              <Text>Sintomas</Text>
+            </C.StatusItem>
+          </C.Status>
+        )
+      }
     </C.Main>
   );
 }

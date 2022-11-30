@@ -3,6 +3,7 @@ import styled from "styled-components";
 const color_green = '#2ac954';
 const color_border = '#ddd';
 const color_grey = '#747474';
+const color_blue = '#3182CE';
 
 export const Main = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ export const Main = styled.div`
   background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 `;
 
 export const Header = styled.div`
@@ -193,6 +195,64 @@ export const CampoHistoricoItem = styled.div`
 
 export const CampoSintomas = styled.div`
   display: ${props => props.show ? 'flex' : 'none'};
+  flex-wrap: wrap;
+`;
+
+export const CampoSintomasHeader = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 0.9rem;
+  padding-bottom: 10px;
+  font-weight: 600;
+  color: ${color_grey};
+
+  @media screen and (max-width: 400px) {
+    & > :not(first-child) {
+      font-size: 0.7rem !important;
+    }
+  }
+`;
+
+export const CampoSintomasTitle = styled.p`
+  flex: 1;
+  line-height: 1.2;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  pointer-events: none;
+  border-bottom: 1px solid #dedede;
+
+  @media screen and (max-width: 400px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const CampoSintomasText = styled.p`
+  min-width: 60px;
+  text-align: end;
+  pointer-events: none;
+`;
+
+export const CampoSintomasItem = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 0.9rem;
+  line-height: 2;
+`;
+
+export const CampoResultado = styled.div`
+  display: ${props => props.show ? 'flex' : 'none'};
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const CampoResultadoHeader = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding-bottom: 20px;
+  color: ${color_grey};
 `;
 
 export const ErrorMessage = styled.div`

@@ -125,7 +125,7 @@ function Informacoes() {
         <Button onClick={onOpen} leftIcon={<ArrowBackIcon />} colorScheme='whiteAlpha' variant='outline'>
           Sair
         </Button>
-        <C.HeaderTitle>Dados e informações pessoais</C.HeaderTitle>
+        <C.HeaderTitle>Dados e informações</C.HeaderTitle>
         <Text>Por favor, preencha os campos a seguir com suas informações.</Text>
       </C.Header>
       <C.Campos>

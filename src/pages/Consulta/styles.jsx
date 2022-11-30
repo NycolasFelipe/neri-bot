@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const color_green = '#2ac954';
-const color_blue = '#3182CE';
 const color_border = '#ddd';
 const color_grey = '#747474';
 
@@ -29,6 +28,7 @@ export const Header = styled.div`
   & > p {
     color: #fff;
     user-select: none;
+    font-size: 1rem;
   }
   & > button {
     margin-right: 15px;
@@ -42,7 +42,7 @@ export const Header = styled.div`
   }
   @media screen and (max-width: 580px) {
     font-size: 0.8rem;
-    padding-left: 110px;
+    padding-top: 50px;
     width: 80vw;
   }
 `;
@@ -68,7 +68,8 @@ export const Campos = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  width: 500px;
+  max-width: 500px;
+  width: 90%;
   box-sizing: border-box;
   padding: 15px 25px;
 `;
@@ -85,6 +86,12 @@ export const FormButtons = styled.div`
     }
     &:last-child:hover {
       background: ${color_green};
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    > * {
+      font-size: 0.8rem !important;
     }
   }
 `;
@@ -107,10 +114,19 @@ export const CampoInformacoesTitle = styled.p`
   color: ${color_grey};
   font-size: 0.9rem;
   font-weight: 500;
+
+  @media screen and (max-width: 400px) {
+    font-size: 0.7rem;
+  }
 `;
 
 export const CampoInformacoesValue = styled.p`
   font-weight: 400;
+  text-align: end;
+
+  @media screen and (max-width: 400px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const CampoHistorico = styled.div`
@@ -141,15 +157,29 @@ export const CampoHistoricoHeader = styled.div`
   padding-bottom: 10px;
   font-weight: 600;
   color: ${color_grey};
+
+  @media screen and (max-width: 400px) {
+    & > :not(first-child) {
+      font-size: 0.7rem !important;
+    }
+  }
 `;
 
 export const CampoHistoricoTitle = styled.p`
   flex: 1;
+  line-height: 1.2;
+  margin-right: 10px;
+  margin-bottom: 15px;
   pointer-events: none;
+  border-bottom: 1px solid #dedede;
+
+  @media screen and (max-width: 400px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const CampoHistoricoText = styled.p`
-  min-width: 100px;
+  min-width: 60px;
   text-align: end;
   pointer-events: none;
 `;
@@ -159,7 +189,6 @@ export const CampoHistoricoItem = styled.div`
   width: 100%;
   font-size: 0.9rem;
   line-height: 2;
-
 `;
 
 export const CampoSintomas = styled.div`
@@ -183,6 +212,7 @@ export const Status = styled.div`
   font-size: 1.1rem;
   user-select: none;
   margin-top: -10px;
+  padding-bottom: 40px;
 `;
 
 export const StatusItem = styled.div`
@@ -198,7 +228,7 @@ export const StatusItem = styled.div`
     font-size: 14px;
   }
   @media screen and (max-width: 380px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     & > :not(p) {
       padding-top: 0;
       font-size: 8px;

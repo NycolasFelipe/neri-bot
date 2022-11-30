@@ -192,13 +192,13 @@ function Consulta() {
                 color='#fff'
                 onClick={() => handleNextButton('historico')}
               >
-                Confirmar e prosseguir
+                Confirmar
               </Button>
             </C.FormButtons>
         </C.CampoInformacoes>
         <C.CampoHistorico show={status.historico}>
           <C.CampoHistoricoHeader>
-            <C.CampoHistoricoTitle>
+            <C.CampoHistoricoTitle style={{border: 'none'}}>
               Histórico de saúde
             </C.CampoHistoricoTitle>
             <C.CampoHistoricoText>Sim</C.CampoHistoricoText>
@@ -211,9 +211,8 @@ function Consulta() {
             <RadioGroup>
               <Stack
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='familiarDoencaGenetica' value='sim'></Radio>
                 <Radio name='familiarDoencaGenetica' value='nao'></Radio>
@@ -227,9 +226,8 @@ function Consulta() {
             <RadioGroup>
               <Stack 
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='hipertensao' value='sim' />
                 <Radio name='hipertensao' value='nao' />
@@ -243,9 +241,8 @@ function Consulta() {
             <RadioGroup>
               <Stack 
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='diabetes' value='sim' />
                 <Radio name='diabetes' value='nao' />
@@ -259,9 +256,8 @@ function Consulta() {
             <RadioGroup>
               <Stack 
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='fumanteTabagismo' value='sim' />
                 <Radio name='fumanteTabagismo' value='nao' />
@@ -275,9 +271,8 @@ function Consulta() {
             <RadioGroup>
               <Stack 
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='doencasRenais' value='sim' />
                 <Radio name='doencasRenais' value='nao' />
@@ -291,9 +286,8 @@ function Consulta() {
             <RadioGroup>
               <Stack 
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='gestante' value='sim' />
                 <Radio name='gestante' value='nao' />
@@ -307,9 +301,8 @@ function Consulta() {
             <RadioGroup>
               <Stack 
                 justifyContent='space-between' 
-                width='115px'
+                width='75px'
                 direction='row'
-                paddingTop='6px'
               >
                 <Radio name='usoRegularMedicamentos' value='sim' />
                 <Radio name='usoRegularMedicamentos' value='nao' />

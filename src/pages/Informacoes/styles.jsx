@@ -15,6 +15,9 @@ export const Main = styled.div`
   background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width: 100vw;
   height: 100vh;
+  @media screen and (max-width: 400px) {
+    height: 120vh;
+  }
 `;
 
 export const Header = styled.div`
@@ -24,11 +27,14 @@ export const Header = styled.div`
   flex-wrap: wrap;
   width: 100vw;
   margin-top: 10px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   & > p {
     color: #fff;
     user-select: none;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 1rem;
   }
   & > button {
     margin-right: 15px;
@@ -42,7 +48,7 @@ export const Header = styled.div`
   }
   @media screen and (max-width: 580px) {
     font-size: 0.8rem;
-    padding-left: 110px;
+    padding-top: 50px;
     width: 80vw;
   }
 `;
@@ -50,8 +56,9 @@ export const Header = styled.div`
 export const HeaderTitle = styled.h1`
   font-family: 'Merienda', cursive;
   font-size: 2rem;
-  line-height: 3;
+  line-height: 1.5;
   text-align: center;
+  margin-top: 25px;
   color: #fff; 
   width: 100%;
 `;
@@ -68,13 +75,15 @@ export const Campos = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  width: 500px;
+  max-width: 500px;
+  width: 90%;
   box-sizing: border-box;
   padding: 15px 25px;
 `;
 
 export const CampoInformacoes = styled.div`
   display: flex;
+  line-height: 1;
   & > div > label {
     color: ${color_grey};
     font-size: 0.8rem;
@@ -112,6 +121,18 @@ export const CampoInformacoes = styled.div`
   .nextButton:hover {
     background: ${color_green};
   }
+
+  @media screen and (max-width: 400px) {
+    & > div > label {
+      font-size: 0.7rem;
+    }
+    & > div > input {
+      font-size: 0.8rem;
+    }
+    #dataNascimento {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 export const CampoNascimento = styled.div`
@@ -143,6 +164,12 @@ export const FormButtons = styled.div`
     }
     &:last-child:hover {
       background: ${color_green};
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    > * {
+      font-size: 0.8rem !important;
     }
   }
 `;

@@ -26,6 +26,7 @@ function Informacoes() {
       sexo: null,
       gestante: null,
       imc: null,
+      idade: null,
     },
   });
 
@@ -64,6 +65,7 @@ function Informacoes() {
     userInfo.informacoes.sexo = sexo;
     userInfo.informacoes.gestante = gestante;
     userInfo.informacoes.imc = Math.round(parseInt(peso)/((parseInt(altura)/100)**2));
+    userInfo.informacoes.idade = Math.floor(idade);
 
     setError(null);
     localStorage.setItem('userInfo', JSON.stringify(userInfo));

@@ -71,7 +71,7 @@ function Analise() {
     return {
       diaSemana: diaSemana.toLowerCase(),
       diaMes: diaMes,
-      mes: mes,
+      mes: mes.toLowerCase(),
       ano: ano,
       hora: hora,
     }
@@ -199,24 +199,25 @@ function Analise() {
         <Text><strong>Paciente</strong>: {userInfo.nomeCompleto}</Text>
         <C.CampoTitle>Dados:</C.CampoTitle>
         <C.CampoTab>
-          <Text>Data nascimento: {userInfo.dataNascimento}</Text>
-          <Text>Sexo: {userInfo.sexo === "masc" ? 'masculino' : 'feminino'}</Text>
+          <Text>Sexo: {userInfo.sexo === "masc" ? 'masculino' : 'feminino'}.</Text>
           {
             userInfo.sexo === "fem" && (
-              <Text>Gestante: {userInfo.gestante}</Text>
+              <Text>Gestante: {userInfo.gestante}.</Text>
             )
           }
+          <Text>Data de nascimento: {userInfo.dataNascimento}.</Text>
+          <Text>Idade: {userInfo.idade}.</Text>
+          <Text>Peso: {userInfo.peso} kg.</Text>
+          <Text>Altura: {userInfo.altura} cm.</Text>
         </C.CampoTab>
 
-        <C.CampoTitle>Histórico de saúde:</C.CampoTitle>
+        <C.CampoTitle>Histórico de saúde:.</C.CampoTitle>
         <C.CampoTab>
           {
             historico.map((e, i) => {
               return (
                 e[1] && (
-                  <Text key={i}>
-                    {handleHistorico(e[0])}
-                  </Text>
+                  <Text key={i}>{handleHistorico(e[0])}.</Text>
                 )
               )
             })
@@ -229,9 +230,7 @@ function Analise() {
             sintomas.map((e, i) => {
               return (
                 e[1] && (
-                  <Text key={i}>
-                    {handleSintomas(e[0])}
-                  </Text>
+                  <Text key={i}>{handleSintomas(e[0])}.</Text>
                 )
               )
             })

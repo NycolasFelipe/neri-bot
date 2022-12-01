@@ -47,7 +47,6 @@ function Consulta() {
       diabetes: null,
       fumanteTabagismo: null,
       doencasRenais: null,
-      gestante: null,
       usoRegularMedicamentos: null,
     },
     sintomas: {
@@ -63,6 +62,9 @@ function Consulta() {
       gargantaInflamada: null,
       coriza: null,
     },
+    report: {
+      date: null,
+    }
   });
   
   function setNewStatus(nextStatus) {
@@ -91,7 +93,6 @@ function Consulta() {
         let diabetes = historicoValido('diabetes');
         let fumanteTabagismo = historicoValido('fumanteTabagismo');
         let doencasRenais = historicoValido('doencasRenais');
-        let gestante = historicoValido('gestante');
         let usoRegularMedicamentos = historicoValido('usoRegularMedicamentos');
 
         if (
@@ -100,7 +101,6 @@ function Consulta() {
           diabetes === null ||
           fumanteTabagismo === null ||
           doencasRenais === null ||
-          gestante === null ||
           usoRegularMedicamentos === null
         ) {
           return setError('Você precisa selecionar pelos menos uma opção em cada item.');
@@ -111,7 +111,6 @@ function Consulta() {
         userReport.historico.diabetes = diabetes;
         userReport.historico.fumanteTabagismo = fumanteTabagismo;
         userReport.historico.doencasRenais = doencasRenais;
-        userReport.historico.gestante = gestante;
         userReport.historico.usoRegularMedicamentos = usoRegularMedicamentos;
         break;
 
@@ -137,6 +136,9 @@ function Consulta() {
         userReport.sintomas.perdaDeApetite = perdaDeApetite;
         userReport.sintomas.gargantaInflamada = gargantaInflamada;
         userReport.sintomas.coriza = coriza;
+
+        let date = new Date();
+        userReport.report.date = date;
 
         localStorage.setItem('userReport', JSON.stringify(userReport));
         setReportEnded(true);
@@ -322,21 +324,6 @@ function Consulta() {
               >
                 <Radio name='doencasRenais' value='sim' />
                 <Radio name='doencasRenais' value='nao' />
-              </Stack>
-            </RadioGroup>
-          </C.CampoHistoricoItem>
-          <C.CampoHistoricoItem>
-            <C.CampoHistoricoTitle>
-              Gestante
-            </C.CampoHistoricoTitle>
-            <RadioGroup>
-              <Stack 
-                justifyContent='space-between' 
-                width='75px'
-                direction='row'
-              >
-                <Radio name='gestante' value='sim' />
-                <Radio name='gestante' value='nao' />
               </Stack>
             </RadioGroup>
           </C.CampoHistoricoItem>

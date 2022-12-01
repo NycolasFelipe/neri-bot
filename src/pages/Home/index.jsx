@@ -147,7 +147,7 @@ function Home() {
 
           <Link className='criar-conta'>Não possui conta? Crie uma agora</Link>
         </C.LoginSection>
-        <C.AboutSection>
+        <C.AboutSection style={{display: 'none'}}>
           <Button 
             rightIcon={<QuestionOutlineIcon />} 
             variant='outline'

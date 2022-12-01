@@ -401,12 +401,6 @@ function Consulta() {
           </C.CampoSintomasItem>
           <C.CampoSintomasItem>
             <C.CampoSintomasTitle>
-              Febre
-            </C.CampoSintomasTitle>
-            <Checkbox id='febre' />
-          </C.CampoSintomasItem>
-          <C.CampoSintomasItem>
-            <C.CampoSintomasTitle>
               Náusea
             </C.CampoSintomasTitle>
             <Checkbox id='nausea' />
